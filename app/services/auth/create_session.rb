@@ -1,7 +1,7 @@
 require "#{Rails.root}/lib/json_web_token"
 
 class Auth::CreateSession
-  Result = ImmutableStruct.new(:session_created?, :jwd, :errors)
+  Result = ImmutableStruct.new(:session_created?, :jwt, :errors)
 
   def self.call(session_params)
     email = session_params[:email]
@@ -15,12 +15,7 @@ class Auth::CreateSession
         )
     end
 
-    jwt_payload = {
-      id: @user.id,
-      email: @user.email,
-      full_name: "#{@user.first_name} #{@user.last_name}"
-    }
-
-    Result.new(session_created?: true, jwt: JsonWebToken.encode(jwt_payload))
+    token = @user.to_token
+    Result.new(session_created?: true, jwt: JsonWebToken.encode(token))
   end
 end

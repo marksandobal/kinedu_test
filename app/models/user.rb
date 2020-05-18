@@ -4,4 +4,13 @@ class User < ApplicationRecord
   validates :email, presence: :true
 
   validates_confirmation_of :password, if: ->(user) { user.password.present? }
+  has_secure_password(validations: false)
+
+  def to_token
+    {
+      id: self.id,
+      email: self.email,
+      full_name: "#{self.first_name} #{self.last_name}"
+    }
+  end
 end

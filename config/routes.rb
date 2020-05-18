@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   scope module: :api do
     scope module: :v1, constraints: ApiVersionConstraint.new(version: 1) do
       resources :sessions, only: [:create]
+      resources :users, only: [:index,:show,:create,:update]
     end
   end
 end

@@ -10,13 +10,16 @@ module Authentication
   private
 
   def authenticate_user
-    debugger
-    decoded_jwt = JsonWebToken.decode(jwt)
-    @session_token = decoded_jwt[:token]
-    @current_user = Token.find_by!(content: @session_token).user
+    decoded_jwt   = JsonWebToken.decode(jwt)
+    @user_id      = decoded_jwt['id']
+    @current_user = User.find(@user_id)
   end
 
   def jwt
+    unless request.headers.include?(:Authorization)
+      raise Kinedu::Exceptions::MissingToken
+    end
+
     request.headers.fetch(:Authorization)
   end
 end
