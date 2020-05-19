@@ -11,6 +11,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Add activity, assistant, baby and activity_log models
 - Add authentication class
 - Add create and destroy session enpoints
+- Add activities controller
+- Add babies controller
+- Add activity logs controller
+- Add base activity serializer
+- Add filter to index in activity logs controller
 
 ### Changed
 - 

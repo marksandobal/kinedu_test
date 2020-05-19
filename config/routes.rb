@@ -5,7 +5,7 @@ Rails.application.routes.draw do
       resources :sessions, only: [:create]
       resources :users, only: [:index,:show,:create,:update]
 
-      resources :activity_logs, only: [:create,:update]
+      resources :activity_logs, only: [:index,:create,:update]
       resources :babies do
         member do
           get 'activity_logs', to: 'activity_logs#baby_activity_logs'

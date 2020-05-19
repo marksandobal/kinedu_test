@@ -1,6 +1,22 @@
 class Api::V1::ActivityLogsController < ApplicationController
   def index
-    
+    activity_logs = ActivityLog.all.order(start_time: :desc)
+    activity_logs = Filter::FilterMethod.new(
+      array_list: activity_logs,
+      filters: params
+    ).filtering
+
+    if params.key?('page')
+      activity_logs = activity_logs.page(params[:page])
+      render(
+        json: activity_logs,
+        each_serializer: Api::V1::BaseActivityLogSerializer,
+        meta: pagination_meta(activity_logs),
+        status: :ok
+      )
+    else
+      render json: activity_logs, each_serializer: Api::V1::BaseActivityLogSerializer, status: :ok
+    end
   end
 
   def baby_activity_logs
@@ -36,7 +52,13 @@ class Api::V1::ActivityLogsController < ApplicationController
 
   def update
     activity_log = ActivityLog.find(params[:id])
-    if activity_log.update!(activity_log_update_params)
+    activity_log_form = ActivityLog::FormObject.new(
+      activity_log_update_params.merge!(
+        activity_log: activity_log
+      )
+    )
+
+    if activity_log_form.update!
       render json: activity_log, serializer: Api::V1::ActivityLogSerializer, status: :ok
     else
       render json: { errors: user_form.errors.messages }, status: :bad_request
