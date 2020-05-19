@@ -8,7 +8,7 @@ class Api::V1::UsersController < ApplicationController
       render(
         json: users,
         each_serializer: Api::V1::UserSerializer,
-        root: users,
+        root: :users,
         meta: pagination_meta(users),
         status: :ok
       )
@@ -20,7 +20,7 @@ class Api::V1::UsersController < ApplicationController
   def show
     user = User.find(params[:id])
 
-    render json: user, each_serializer: Api::V1::UserSerializer, status: :ok
+    render json: user, serializer: Api::V1::UserSerializer, status: :ok
 
   rescue ActiveRecord::RecordNotFound => e
     render json: { errors: [e.message] }, status: :not_found

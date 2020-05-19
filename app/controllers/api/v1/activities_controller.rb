@@ -7,23 +7,26 @@ class Api::V1::ActivitiesController < ApplicationController
       render(
         json: activities,
         each_serializer: Api::V1::ActivitySerializer,
-        root: activities,
+        root: :activities,
         meta: pagination_meta(activities),
         status: :ok
       )
+    else
+      render json: activities, each_serializer: Api::V1::ActivitySerializer, status: :ok
     end
 
-    def show
-      activity = Activity.find(params[:id])
+  end
 
-      render(
-        json: activity,
-        serializer: Api::V1::ActivitySerializer,
-        status: :ok
-      )
+  def show
+    activity = Activity.find(params[:id])
 
-    rescue ActiveRecord::RecordNotFound => e
-      render json: { errors: [e.message] }, stauts: :not_found
-    end
+    render(
+      json: activity,
+      serializer: Api::V1::ActivitySerializer,
+      status: :ok
+    )
+
+  rescue ActiveRecord::RecordNotFound => e
+    render json: { errors: [e.message] }, stauts: :not_found
   end
 end
