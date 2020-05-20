@@ -5,6 +5,7 @@ Rails.application.routes.draw do
       resources :sessions, only: [:create]
       resources :users, only: [:index,:show,:create,:update]
 
+      resources :activities, only: [:index,:show]
       resources :activity_logs, only: [:index,:create,:update]
       resources :babies do
         member do
@@ -12,7 +13,6 @@ Rails.application.routes.draw do
         end
       end
 
-      get 'activities', to: 'activities#index'
       get 'babies', to: 'babies#index'
     end
   end

@@ -27,6 +27,6 @@ class Api::V1::ActivitiesController < ApplicationController
     )
 
   rescue ActiveRecord::RecordNotFound => e
-    render json: { errors: [e.message] }, stauts: :not_found
+    render json: { errors: [e.message] }, status: :not_found
   end
 end

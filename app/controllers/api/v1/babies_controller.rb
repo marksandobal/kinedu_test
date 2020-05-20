@@ -23,7 +23,6 @@ class Api::V1::BabiesController < ApplicationController
     render(
       json: baby,
       serializer: Api::V1::BabySerializer,
-      root: :baby,
       status: :ok
     )
 

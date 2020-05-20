@@ -44,9 +44,9 @@ class Api::V1::ActivityLogsController < ApplicationController
 
     if activity_log_form.create!
       activity_log = activity_log_form.activity_log
-      render json: activity_log, serializer: Api::V1::ActivityLogSerializer, status: :ok
+      render json: activity_log, serializer: Api::V1::ActivityLogSerializer, status: :created
     else
-      render json: { errors: user_form.errors.messages }, status: :bad_request
+      render json: { errors: activity_log_form.errors.messages }, status: :bad_request
     end
   end
 
