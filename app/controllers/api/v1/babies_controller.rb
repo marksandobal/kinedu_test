@@ -8,8 +8,7 @@ class Api::V1::BabiesController < ApplicationController
       render(
         json: babies,
         each_serializer: Api::V1::BabySerializer,
-        root: :babies,
-        meta: pagination_meata(babies),
+        meta: pagination_meta(babies),
         status: :ok
       )
     else

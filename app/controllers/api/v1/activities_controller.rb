@@ -7,7 +7,6 @@ class Api::V1::ActivitiesController < ApplicationController
       render(
         json: activities,
         each_serializer: Api::V1::ActivitySerializer,
-        root: :activities,
         meta: pagination_meta(activities),
         status: :ok
       )
