@@ -35,6 +35,8 @@ class Api::V1::BaseActivityLogSerializer < ActiveModel::Serializer
   attribute(:duration) do
     if object.duration
       "#{object.duration} min"
+    else
+      "-"
     end
   end
 end

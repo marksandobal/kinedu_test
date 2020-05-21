@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
       resources :activities, only: [:index,:show]
       resources :activity_logs, only: [:index,:create,:update]
+      resources :assistants, only: [:index]
       resources :babies do
         member do
           get 'activity_logs', to: 'activity_logs#baby_activity_logs'
