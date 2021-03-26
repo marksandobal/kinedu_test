@@ -30,4 +30,7 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  controller:
+    application_controller:
+      end_time_error: stop_time field can't be greater than the start_time
+      missing_token: Token not found

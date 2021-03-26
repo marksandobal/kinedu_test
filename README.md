@@ -1,24 +1,59 @@
-# README
+# kinedu api test - backend
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+##Requirements
 
-Things you may want to cover:
+* ruby
+* rails
+* mysql2
+* bundler
 
-* Ruby version
+## Setup
 
-* System dependencies
+1. Run bundler to install project dependencies.
 
-* Configuration
+1. Get master.key
 
-* Database creation
+1. Create `config/database.yml` based on `config/database.yml.example` to match your local settings.
 
-* Database initialization
+1. Create database.
 
-* How to run the test suite
+    ```sh
+    $ rake db:create
+    ```
 
-* Services (job queues, cache servers, search engines, etc.)
+1. Load db schema.
 
-* Deployment instructions
+    ```sh
+    $ rake db:schema:load
+    ```
 
-* ...
+## Run
+
+1. Run application server.
+
+    ```sh
+    $ rails s -b your.ip
+    ```
+
+## Testing
+
+The application uses rspec for testing.
+
+To run all tests use the following command.
+
+```sh
+$ rspec
+```
+
+To run a specific file of tests use the following command.
+
+```sh
+$ rspec path/to/file_spec.rb
+```
+
+To run a specific test in a file use the following command. Change the number to the line of the first line of the test block.
+
+```sh
+$ rspec path/to/file_spec.rb:15
+```
+
